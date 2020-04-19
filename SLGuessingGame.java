@@ -29,7 +29,7 @@ public class SLGuessingGame {
 
             System.out.printf("\nI'm thinking of a number between 1 and %d...\n", max);
             int n = rand.nextInt(max + 1); // Generates number for user to guess
-            n = 42; // For testing; uncomment to set n = 42
+            // n = 42; // For testing; uncomment to set n = 42
 
             guesses = singleGame(input, n, guesses); // Starts game, retrieves guess count
 
