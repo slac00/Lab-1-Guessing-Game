@@ -108,8 +108,7 @@ public class SLGuessingGame {
         System.out.print("\nOverall results:");
         System.out.printf("\n    total games   = %d", totalGames);
         System.out.printf("\n    total guesses = %d", totalGuesses);
-        double num = 10/3;
-        printf("This will truncate a repeating number: %.1f", num);
+        System.out.printf("\n    guesses/game  = %.1f", (double) totalGuesses / totalGames);
         System.out.printf("\n    best game     = %d\n", bestGame);
 
     }
