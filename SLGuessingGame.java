@@ -28,10 +28,10 @@ public class SLGuessingGame {
         while (playAgain) { // Loops new games until user quits
 
             System.out.printf("\nI'm thinking of a number between 1 and %d...\n", max);
-            int n = rand.nextInt(max + 1); // Generates number for user to guess
+            final int n = rand.nextInt(max + 1); // Generates number for user to guess
             // n = 42; // For testing; uncomment to set n = 42
 
-            guesses = singleGame(input, n, guesses); // Starts game, retrieves guess count
+            guesses = singleGame(input, n, guesses, max); // Starts game, retrieves guess count
 
             if (guesses < bestGame) { // Updates high score
                 bestGame = guesses;
@@ -53,7 +53,7 @@ public class SLGuessingGame {
     }
 
     // Plays a single game
-    public static int singleGame(final Scanner input, final int n, int guesses) {
+    public static int singleGame(final Scanner input, final int n, int guesses, final int max) {
 
         int currentGuess = 0; // Primes var for current guess
         while (currentGuess != n) { // Prompts for new guess if last guess incorrect
@@ -63,7 +63,10 @@ public class SLGuessingGame {
 
                 currentGuess = input.nextInt(); // Prompts for a guess
 
-                if (currentGuess > n) { // Determines if guess is too low...
+                if (currentGuess > max || currentGuess < 1) { // Guess out of range
+                    System.out.printf("Out of bounds! Range: 1 - %d\n", max);
+                    guesses--; // Ensures that out of bounds guess is not counted
+                } else if (currentGuess > n) { // Determines if guess is too low...
                     System.out.println("It's lower.");
                 } else if (currentGuess < n) { // ...or too high
                     System.out.println("It's higher.");
@@ -73,9 +76,9 @@ public class SLGuessingGame {
 
             }
 
-            catch (java.util.InputMismatchException ex) {
+            catch (final java.util.InputMismatchException ex) {
 
-                System.out.println("\nInvalid input! Only integers are allowed.");
+                System.out.println("Invalid input! Only integers are allowed.");
                 currentGuess = 0; // Resets currentGuess to 0, doesn't count turn as guess
                 input.nextLine(); // Prevents try-catch indefinite loop
 
@@ -105,7 +108,8 @@ public class SLGuessingGame {
         System.out.print("\nOverall results:");
         System.out.printf("\n    total games   = %d", totalGames);
         System.out.printf("\n    total guesses = %d", totalGuesses);
-        System.out.printf("\n    guesses/game  = %.1f", (double) totalGuesses / totalGames);
+        double num = 10/3;
+        printf("This will truncate a repeating number: %.1f", num);
         System.out.printf("\n    best game     = %d\n", bestGame);
 
     }
