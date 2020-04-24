@@ -10,6 +10,13 @@ import java.util.Random; // For creating pseudorandom number to guess
 import java.util.Scanner; // For user input object
 
 public class SLGuessingGame {
+    
+    public enum Status { // Status of guess (too high, low); Did I use enum correctly?
+
+        HIGHER, LOWER;
+
+    }
+    
     public static void main(final String args[]) {
 
         final int max = 100; // Guess range: 1 to max (simply moved global constant into main())
@@ -67,9 +74,9 @@ public class SLGuessingGame {
                     System.out.printf("Out of bounds! Range: 1 - %d\n", max);
                     guesses--; // Ensures that out of bounds guess is not counted
                 } else if (currentGuess > n) { // Determines if guess is too low...
-                    System.out.println("It's lower.");
+                    System.out.println("It's " + Status.LOWER + "."); // String enums can't be...
                 } else if (currentGuess < n) { // ...or too high
-                    System.out.println("It's higher.");
+                    System.out.println("It's " + Status.HIGHER + "."); // ... printed with printf
                 }
 
                 guesses++; // Increments guess counter by 1 every valid turn
